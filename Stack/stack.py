@@ -1,38 +1,51 @@
 class Stack():
-    def __init__(self, size=10):
+    def __init__(self, size=5):
         self.Max_size = size
         self.arr = size * [None]
-        self.top = 0
+        self.top = -1
 
     def push(self, value):
         if self.top < self.Max_size - 1:
-            self.arr[self.top] = value
             self.top += 1
+            self.arr[self.top] = value
+
         else:
-            print("Stack Overflow")
+            print()
+            print("\nStack Overflow!")
 
     def pop(self):
         if self.top == -1:
-            print("Stack Underflow")
+            print("\nStack Underflow!")
         else:
             value = self.arr[self.top]
             self.top -= 1
+            print("Pop Sucessful!\n")
             return value
 
     def __str__(self):
         length = self.top
         s = ""
-        for i in range(length - 1, -1, -1):
+        for i in range(length, -1, -1):
             s = s + str(self.arr[i]) + "\n"
-        if s == "":
-            return "Stack is Empty!"
         return s
-list = Stack(100)
-for i in range(99):
-    list.push(i)
 
-print(list)
 
-for _ in range(100):
-    list.pop()
-print(list)
+list = Stack()
+print("Enter the operation you want to perform:")
+print("Enter 1 to push")
+print("Enter 2 to pop")
+print("Enter 3 to exit")
+while True:
+    option = int(input("Enter your choice:"))
+    if option == 1:
+        list.push(int(input("Enter the value you want to push:")))
+        print()
+        print(list)
+        print()
+    if option == 2:
+        list.pop()
+        print()
+        print(list)
+        print()
+    if option == 3:
+        break
