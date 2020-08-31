@@ -1,4 +1,5 @@
 class Stack():
+    MyName = "Gouri Shanker"
     def __init__(self, size=5):
         self.Max_size = size
         self.arr = size * [None]
@@ -30,22 +31,22 @@ class Stack():
         return s
 
 
-list = Stack()
-print("Enter the operation you want to perform:")
-print("Enter 1 to push")
-print("Enter 2 to pop")
-print("Enter 3 to exit")
-while True:
-    option = int(input("Enter your choice:"))
-    if option == 1:
-        list.push(int(input("Enter the value you want to push:")))
-        print()
-        print(list)
-        print()
-    if option == 2:
-        list.pop()
-        print()
-        print(list)
-        print()
-    if option == 3:
-        break
+# list = Stack()
+# print("Enter the operation you want to perform:")
+# print("Enter 1 to push")
+# print("Enter 2 to pop")
+# print("Enter 3 to exit")
+# while True:
+#     option = int(input("Enter your choice:"))
+#     if option == 1:
+#         list.push(int(input("Enter the value you want to push:")))
+#         print()
+#         print(list)
+#         print()
+#     if option == 2:
+#         list.pop()
+#         print()
+#         print(list)
+#         print()
+#     if option == 3:
+#         break

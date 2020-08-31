@@ -70,7 +70,8 @@ public class Stack{
 				else{
 					System.out.println("Invalid input :(");
 				}
-
 	}
+	Stack list1 = new Stack();
+	System.out.println(list1);
 }
 }

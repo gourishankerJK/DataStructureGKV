@@ -50,8 +50,8 @@ void display(struct queue *qu){
 int main()
 {
 	struct queue qu;
-	creatqueue(&qu);
-	push(&qu,10);
+        creatqueue(&qu);
+        push(&qu,10);
 	push(&qu,20);
 	display(&qu);
 	pop(&qu);
@@ -68,6 +68,3 @@ int main()
 	pop(&qu);
 	return 0;
 }
-
-
-
