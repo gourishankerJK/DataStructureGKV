@@ -57,6 +57,6 @@ class Conversion:
         print("".join(self.output))
 
 
-exp = "a+b*(c^d-e)^(f+g*h)-i"
+exp = input("Enter the expression:")
 obj = Conversion(len(exp))
 obj.infixToPostfix(exp)

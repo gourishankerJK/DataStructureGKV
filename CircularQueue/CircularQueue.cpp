@@ -12,6 +12,7 @@ void createqueue(struct queue *Q) {
   Q->list = new int[Q->size];
 }
 void insertion(int value, struct queue *Q) {
+  // Queue full condition in CircularQueue
   if ((Q->rear == Q->size - 1 && Q->front == 0) or (Q->rear + 1 == Q->front)) {
     cout << "Queue is full !";
   } else if (Q->rear == -1) {
@@ -27,6 +28,7 @@ void insertion(int value, struct queue *Q) {
   }
 }
 int deletion(struct queue *Q) {
+  // Empty! Queue condition
   if (Q->front == -1) {
     cout << "            \nQueue is Empty!\n";
   } else if (Q->front == Q->rear) {
@@ -53,10 +55,10 @@ void display(struct queue *Q) {
   } else if (Q->front == -1) {
     cout << "\nQueue Empty!";
   } else {
-    for (int i = Q->front; i < Q->size + 1; i++) {
+    for (int i = Q->front; i < Q->size; i++) {
       cout << Q->list[i] << "  ";
     }
-    for (int i = 0; i < Q->rear + 1; i++) {
+    for (int i = 0; i < (Q->rear) + 1; i++) {
       cout << Q->list[i] << "  ";
     }
   }
@@ -85,10 +87,8 @@ int main() {
       break;
     } else if (option == 3) {
       display(&Q);
-    }
-    else {
-        cout << "Invalid option !";
-
+    } else {
+      cout << "Invalid option !";
     }
   }
   return 0;
