@@ -21,7 +21,7 @@ class Queue():
         if(self.front == -1):  # Queue Empty Conditon
             print("\nQueue is empty!")
         if self.front == self.rear:
-            value = self.rear
+            value = self.arr[self.rear]
             self.front = self.rear = -1
             return value
         elif self.front == self.Max_size - 1 and self.rear >= 0:

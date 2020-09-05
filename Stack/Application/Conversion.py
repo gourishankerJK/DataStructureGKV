@@ -63,6 +63,16 @@ def Prefix(exp):
     return reverse(Postfix(reverse(exp)))
 
 
-expression = input("Enter the expression :")
-print("Prefix :", Prefix(expression))
-print("Postfix :", Postfix(expression))
+while True:
+    print("For Postfix ,press 1 \nFor Prefix ,press 2 \nTo exit , press 3 ")
+    opt = input("Enter your choice :")
+    if opt == "2":
+        expression = input("Enter the expression :")
+        print("Prefix :", Prefix(expression))
+    elif opt == "1":
+        expression = input("Enter the expression :")
+        print("Postfix :", Postfix(expression))
+    elif opt == "3":
+        break
+    else:
+        print("Invaild input !")
