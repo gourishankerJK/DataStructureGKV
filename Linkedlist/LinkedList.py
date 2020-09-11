@@ -10,7 +10,10 @@ class LinkedList:
         self.last = None
         self.len = 0
 
-    def append(self, value):
+    def length(self):    # returns the length at just o(1) ,i.e constant time
+        return self.len
+
+    def append(self, value):  # appends the element at the last
         node = Node(value)
         if self.first == self.last == None:
             self.first = node
@@ -20,7 +23,7 @@ class LinkedList:
             self.last = node
         self.len += 1
 
-    def prepend(self, value):
+    def prepend(self, value):  # inserts at the beginning
         node = Node(value)
         if self.first == self.last == None:
             self.first = node
@@ -30,13 +33,14 @@ class LinkedList:
             self.first = node
         self.len += 1
 
-    def insert(self, value, pos):
+    def insert(self, value, pos):  # Inserts the element at given position
         node = Node(value)
         if pos > self.len + 1:
             raise "Position don't exist!"
             return
         elif pos == 0:
             self.prepend(value)
+            return
         elif pos == self.len + 1:
             self.last.next = node
             self.last = node
@@ -50,20 +54,43 @@ class LinkedList:
             temp.next = node
         self.len += 1
 
-    def __str__(self):
+    def pop(self):   # deletes the last elements of linkedlist
+        cur = self.first
+        while cur.next != None:
+            prev = cur
+            cur = cur.next
+        prev.next = None
+        self.len -= 1
+        return cur.value
+
+    def remove(self, pos=1):  # delete the at given position but by default deletes at the beginning position
+        if self.len == 0:
+            raise "Linkedlist is empty !"
+        if self.len < pos or pos <= 0:
+            raise "Invalid Position!"
+        if self.len == pos != 1:
+            return self.pop()
+        cur = self.first
+        self.len -= 1
+        if pos == 1:
+            value = cur.value
+            self.first = cur.next
+            cur.next = None
+            return value
+        count = 1
+        while count < pos:
+            prev = cur
+            cur = cur.next
+            count += 1
+        prev.next = cur.next
+        value = cur.value
+        cur.next = None
+        return value
+
+    def __str__(self):  # for printing the linkedlist
         temp = self.first
         s = "LinkedList :"
         while temp:
             s = s + str(temp.value) + " "
             temp = temp.next
         return s
-
-
-list = LinkedList()
-for i in range(0, 50, 5):
-    list.append(i)
-print(list)
-list.prepend(99)
-print(list)
-list.insert(22, 0)
-print(list)
