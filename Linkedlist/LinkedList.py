@@ -86,7 +86,6 @@ class LinkedList:
         value = cur.value
         cur.next = None
         return value
-
     def __str__(self):  # for printing the linkedlist
         temp = self.first
         s = "LinkedList :"
@@ -94,3 +93,20 @@ class LinkedList:
             s = s + str(temp.value) + " "
             temp = temp.next
         return s
+list = LinkedList()
+list.append(1)
+print(list)
+list.prepend(2)
+print(list)
+list.append(3)
+print(list)
+list.insert(4, 3)
+print(list)
+list.pop()
+print(list)
+list.remove(2)
+print(list)
+list.remove(1)
+print(list)
+list.insert(5, 0)
+print(list)
