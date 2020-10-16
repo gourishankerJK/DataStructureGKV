@@ -6,13 +6,16 @@ class Stack():
         self.top = -1
 
     def push(self, value):
-        if self.top < self.Max_size - 1:
-            self.top += 1
-            self.arr[self.top] = value
+        if value %2 != 0:
+            if self.top < self.Max_size - 1:
+                self.top += 1
+                self.arr[self.top] = value
 
-        else:
-            print()
-            print("\nStack Overflow!")
+            else:
+                print()
+                print("\nStack Overflow!")
+        else :
+            print("Invalid ,Enter odd value!")
 
     def pop(self):
         if self.top == -1:
@@ -21,7 +24,7 @@ class Stack():
             value = self.arr[self.top]
             self.top -= 1
             print("Pop Sucessful!\n")
-            return value
+            return value**2
 
     def __str__(self):
         length = self.top
@@ -44,7 +47,7 @@ while True:
         print(list)
         print()
     if option == 2:
-        list.pop()
+        print(list.pop())
         print()
         print(list)
         print()
