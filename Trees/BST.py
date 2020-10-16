@@ -18,16 +18,16 @@ class BinarySearchTree:
             while True:
                 if temp.value > value:
                     if temp.left is None:
+                        temp.left = node
                         break
                     temp = temp.left
                 else:
                     if temp.right is None:
+                        temp.right = node
                         break
                     temp = temp.right
-            if temp.value > value:
-                temp.left = node
-            else:
-                temp.right = node
+
+
 
     def search(self, value):
         temp = self.root
@@ -50,8 +50,6 @@ class BinarySearchTree:
 
 
 tree = BinarySearchTree()
-tree.insert(47)
-for i in range(0, 70, 5):
-    tree.insert(i)
-for i in range(0,70):
-    tree.search(i)
+tree.insert(35)
+tree.insert(50)
+tree.search(50)
