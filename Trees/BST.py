@@ -27,7 +27,41 @@ class BinarySearchTree:
                         break
                     temp = temp.right
 
+    def inorder(self):
+        root = self.root
+        print("Inorder :", end="")
 
+        def inorderp(root):
+            if root:
+                inorderp(root.left)
+                print(root.value, end=" ")
+                inorderp(root.right)
+        inorderp(root)
+        print()
+
+    def postorder(self):
+        root = self.root
+        print("Postorder :", end=" ")
+
+        def postorderp(root):
+            if root:
+                postorderp(root.left)
+                postorderp(root.right)
+                print(root.value, end=" ")
+        postorderp(root)
+        print()
+
+    def preorder(self):
+        root = self.root
+        print("Preorder :", end="")
+
+        def preorderp(root):
+            if root:
+                print(root.value, end=" ")
+                preorderp(root.left)
+                preorderp(root.right)
+        preorderp(root)
+        print()
 
     def search(self, value):
         temp = self.root
@@ -50,6 +84,10 @@ class BinarySearchTree:
 
 
 tree = BinarySearchTree()
-tree.insert(35)
-tree.insert(50)
-tree.search(50)
+tree.insert(47)
+for i in range(-10, 100, 20):
+    tree.insert(i)
+tree.inorder()
+tree.postorder()
+tree.preorder()
+tree.search(13)
