@@ -2,7 +2,7 @@ class Node:
     def __init__(self, value):
         self.value = value
         self.next = None
-        self.prev = None
+        self.back = None
 
 
 class DoubleLinkedList():
@@ -16,7 +16,7 @@ class DoubleLinkedList():
             self.first = node
             self.last = node
         else:
-            node.prev = self.last
+            node.back = self.last
             self.last.next = node
             self.last = node
 
@@ -24,11 +24,12 @@ class DoubleLinkedList():
         node = Node(value)
         if self.first == None:
             self.first = node
-            node.prev = self.first
+            node.back = self.first
         else:
             node.next = self.first
-            self.first.prev = node
+            self.first.back = node
             self.first = node
+    def insert(self,value,pos=1)
 
     def __str__(self):  # for printing the linkedlist
         temp = self.first
@@ -40,7 +41,3 @@ class DoubleLinkedList():
 
 
 list = DoubleLinkedList()
-list.append(9)
-list.append(10)
-list.prepend(50)
-print(list)

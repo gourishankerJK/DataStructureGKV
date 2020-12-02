@@ -1,12 +1,10 @@
 class Stack():
-    MyName = "Gouri Shanker"
     def __init__(self, size=5):
         self.Max_size = size
         self.arr = size * [None]
         self.top = -1
 
     def push(self, value):
-        if value %2 != 0:
             if self.top < self.Max_size - 1:
                 self.top += 1
                 self.arr[self.top] = value
@@ -14,9 +12,7 @@ class Stack():
             else:
                 print()
                 print("\nStack Overflow!")
-        else :
-            print("Invalid ,Enter odd value!")
-
+ 
     def pop(self):
         if self.top == -1:
             print("\nStack Underflow!")
@@ -24,7 +20,7 @@ class Stack():
             value = self.arr[self.top]
             self.top -= 1
             print("Pop Sucessful!\n")
-            return value**2
+            return value
 
     def __str__(self):
         length = self.top

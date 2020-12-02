@@ -56,6 +56,10 @@ class LinkedList:
 
     def pop(self):   # deletes the last elements of linkedlist
         cur = self.first
+        if cur.next == None :
+            self.last = self.first = None
+            self.len -= 1
+            return cur.value
         while cur.next != None:
             prev = cur
             cur = cur.next
@@ -100,3 +104,26 @@ class LinkedList:
             s = s + str(temp.value) + " "
             temp = temp.next
         return s
+list = LinkedList()
+print("Welcome ,\nEnter \n1 for insertion at beginging \n2 to insert at last \n3 to insert by position \n4 to delete the value at beginggng \n5 To delete at last \n6 To delete at any given postion\n8 to exit")
+while True :
+    input1 = input("Enter your choice :")
+    if int(input1) == 1 :
+        list.prepend(int(input('Enter the value :')))
+    elif int(input1) == 2 :
+        list.append(int(input('Enter the value :')))
+    elif int(input1) ==  3:
+        pos = int(input("Enter the postion :"))
+        value = int(input("Enter the value"))
+        list.insert(value,pos)
+    elif int(input1) == 4 :
+        list.remove()
+    elif int(input1) == 5 :
+        list.pop()
+    elif int(input1) == 6 :
+        list.remove(int(input('Enter the postion :')))
+    elif int(input1) == 8 :
+        break
+    else :
+        print("Invalid input !")
+    print(list)

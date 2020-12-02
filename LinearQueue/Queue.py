@@ -44,11 +44,11 @@ class Queue():
 
 
 list = Queue()
+print("Enter the operation you want to perform:")
+print("Enter 1 to insertion")
+print("Enter 2 to deletion")
+print("Enter 3 to exit")
 while True:
-    print("Enter the operation you want to perform:")
-    print("Enter 1 to insertion")
-    print("Enter 2 to deletion")
-    print("Enter 3 to exit")
     option = int(input("Enter your choice:"))
     if option == 1:
         list.insertion(int(input("Enter the value you want to insertion:")))
@@ -57,5 +57,3 @@ while True:
     if option == 3:
         break
     print("\n", "    ", list)
-    sleep(1.5)
-    clear()

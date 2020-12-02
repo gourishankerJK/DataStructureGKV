@@ -16,7 +16,7 @@ class BinarySearchTree:
             self.root = node
         else:
             while True:
-                if temp.value == value :
+                if temp.value == value:
                     print("Redundant values are not allowed!")
                     break
                 if temp.value > value:
@@ -31,55 +31,69 @@ class BinarySearchTree:
                     temp = temp.right
 
     def deletion(self, value):
-        temp = self.root
-        if temp is None:
-            print("Tree is Empty!")
-        else:
-            while temp.value != value:
-                temp3 = temp
-                if temp.value > value:
-                    if temp.left is None:
-                        print("Value not found!")
-                        break
-                    temp = temp.left
+        def maxvaluenode(node, temp):
+            current = node
+            while current.right is not None:
+                temp = current
+                current = current.right
+            return current, temp
+
+        def minvaluenode(node, temp):
+            current = node
+            if current is None:
+                current = temp.left.right
+            while current.left is not None:
+                temp = current
+                current = current.left
+            return current, temp
+
+        def ischild(current):
+            return (current.left is None and current.right is None)
+
+        def d(current, value, temp, flag):
+            while current is not None and current.value != value:
+                temp = current
+                if current.value > value:
+                    current = current.left
                 else:
-                    if temp.value < value:
-                        if temp.right is None:
-                            print("Value not found!")
-                            break
-                        temp = temp.right
+                    current = current.right
+            if current is None:
+                if flag == 1:
+                    return
+                else:
+                    print("VAlue not found!")
+                    return
+            if ischild(current):
+                if temp.left is current:
+                    temp.left = None
+                else:
+                    temp.right = None
+                return
+            return current
+
+        if self.root is None:
+            print("Tree is empty!")
+            return
+        current = self.root
+        if current.value == value and current.left is None and current.right is None:
+            self.root = None
+            return
+
+        flag = 0
+        current = d(current, value, None, flag)
+        if current is None:
+            return
+        flag = 1
+        while not ischild(current):
+            temp = current
+            if current.right is not None:
+                min_value, temp = minvaluenode(current.right, temp)
             else:
-                while True:
-                    if temp.left:
-                        temp2 = temp.left
-                        while True:
-                            if temp2.right:
-                                temp3 = temp2
-                                temp2 = temp2.right
-                            else:
-                                temp.value = temp2.value
-                                temp = temp2
-                                break
-                    elif temp.right:
-                        temp2 = temp.right
-                        while True:
-                            if temp2.left:
-                                temp3 = temp2
-                                temp2 = temp2.left
-
-                            else:
-                                temp.value = temp2.value
-                                temp = temp2
-                                break
-                    else:
-                            if temp3.left :
-                                if temp3.left.value == temp.value :
-                                    temp3.left = None
-                                temp3.right = None
-                            else :
-                                temp3.right = None
-
-                            break
+                min_value, temp = maxvaluenode(current.left, temp)
+            current.value = min_value.value
+            current = d(min_value, current.value, temp, flag)
+            if current is None:
+                break
 
     def inorder(self):
         root = self.root
@@ -140,22 +154,20 @@ class BinarySearchTree:
 
 
 tree = BinarySearchTree()
-print("Enter the operations you want to perform :\n1 ,for insertion\n2,for deletion\n3,for printing tree in postorder\n4, in inorder\n5,in preorder \n 6 to exit \n  ")
-while True :
+print("Enter the operations you want to perform :\n1 ,for insertion\n2,for deletion\n3,for printing tree  \n4 to exit \n  ")
+while True:
     input1 = int(input("Enter the number: "))
-    if input1 == 1 :
+    if input1 == 1:
         tree.insert(int(input("Enter the number you want to insert : ")))
         print()
-    elif input1 == 2 :
+    elif input1 == 2:
         tree.deletion(int(input("Enter the you wanna delete :")))
         print()
     elif input1 == 3:
         tree.postorder()
-    elif input1 == 4:
         tree.inorder()
-    elif input1 == 5:
         tree.preorder()
-    elif input1 == 6 :
+    elif input1 == 4:
         break
-    else :
+    else:
         print("Invalid Key !")
