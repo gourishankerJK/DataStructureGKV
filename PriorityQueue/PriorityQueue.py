@@ -1,60 +1,79 @@
-class PriorityQueue():
+class Node:
+    def __init__(self, value, pr):
+        self.data = value
+        self.pr = pr
+        self.next = None
+
+
+class PriorityQueue:
     def __init__(self, size=5):
-        self.Max_size = size
-        self.front = -1
-        self.rear = -1
-        self.list = [[None for _ in range(5)] for _ in range(2)]
+        self.size = size
+        self.len = 0
+        self.size = size
+        self.head = None
+        self.tail = None
 
-    def insert(self, value, priority):
-        if self.rear == -1:
-            self.front = 0
-            self.rear = 0
-            self.list[0][self.rear] = value
-            self.list[1][self.rear] = priority
-        elif self.rear == self.Max_size - 1:
-            print("PriorityQueue is full")
-        else:
-            index = self.rear
-            flag = 0
-            while True:
-                print(self.list[1][index], priority, value)
-                if self.list[1][index] > priority and index != 0:
-                    if index == self.rear:
-                        self.rear += 1
-                        self.list[1][self.rear] = self.list[1][index]
-                        self.list[0][self.rear] = self.list[0][index]
-                        flag = 1
-                    index -= 1
-                else:
-                    break
-            if flag != 1:
-                self.rear += 1
-                self.list[1][self.rear] = priority
-                self.list[0][self.rear] = value
+    def insert(self, value, pro):
+        if self.len <= self.size:
+            self.len += 1
+            node = Node(value, pro)
+            if self.head is None:
+                self.head = self.tail = node
+            elif self.head.pr < node.pr:
+                node.next = self.head
+                self.head = node
+            elif self.tail.pr > node.pr:
+                self.tail.next = node
+                self.tail = node
 
-    def Del(self):
-        if self.front == -1:
-            print("Queue empty!")
-        elif self.front == self.rear:
-            self.front = self.rear = -1
+            else:
+                cur = self.head.next
+                prev = self.head
+                while cur is not None:
+                    if cur.pr == node.pr:
+                        node.next = cur.next
+                        cur.next = node
+                        break
+                    elif cur.pr < node.pr:
+                        node.next = cur
+                        prev.next = node
+                        break
+                    else:
+                        prev = cur
+                        cur = cur.next
+
+
         else:
-            temp = 0
-            while temp < self.front:
-                self.list[0][temp] = self.list[0][temp + 1]
-                temp += 1
+            print("Queue is full!")
+
+    def DEL(self):
+        if self.head:
+            value = self.head.data
+            self.head = self.head.next
+            return value
+        else:
+            print("PQ is empty!")
 
     def __str__(self):
-        s = "Queue :"
-        for i in range(self.front, self.rear + 1):
-            s += str(self.list[0][i])
+        temp = self.head
+        s = "PQ :"
+        while temp:
+            s = s + str(temp.data) + " "
+            temp = temp.next
         return s
 
 
-l = PriorityQueue()
-l.insert(1, 2)
-l.insert(2, 2)
-l.insert(3, 1)
-print(l)
-print(l.list)
-l.Del()
-print(l.list)
+list = PriorityQueue(5)
+print("Enter the operation you want to perform:")
+print("Enter 1 to insertion")
+print("Enter 2 to deletion")
+print("Enter 3 to exit")
+while True:
+    option = int(input("Enter your choice:"))
+    if option == 1:
+        list.insert(int(input("Enter the value you want to insert: ")),int(input("\nEnter the priority of the element : ")))
+    if option == 2:
+        list.DEL()
+    if option == 3:
+        break
+    print("\n", "    ", list)

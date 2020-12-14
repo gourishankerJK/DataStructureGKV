@@ -1,104 +1,87 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-
-
 class BinarySearchTree:
+    class Node:
+        def __init__(self, value):
+            self.value = value
+            self.left = None
+            self.right = None
+
     def __init__(self):
         self.root = None
 
-    def insert(self, value):
-        node = Node(value)
-        temp = self.root
-        if temp is None:
-            self.root = node
+    def insertion(self,value):
+        def _insert(root,node):
+            if root.value < node.value :
+                if root.right is not None :
+                    _insert(root.right, node)
+                else :
+                    root.right = node
+            else :
+                if root.left is not None :
+                    _insert(root.left, node)
+                else :
+                    root.left = node
+        if self.root is None :
+            self.root = self.Node(value)
+        else :
+            _insert(self.root,self.Node(value))
+
+    def search(self, node, value, parent):
+        if node:
+            if node.value == value:
+                return node, parent
         else:
-            while True:
-                if temp.value == value:
-                    print("Redundant values are not allowed!")
-                    break
-                if temp.value > value:
-                    if temp.left is None:
-                        temp.left = node
-                        break
-                    temp = temp.left
-                else:
-                    if temp.right is None:
-                        temp.right = node
-                        break
-                    temp = temp.right
+            return None, None
+        if node.value < value:
+            return self.search(node.right, value, node)
+        else:
+            return self.search(node.left, value, node)
 
-    def deletion(self, value):
-        def maxvaluenode(node, temp):
-            current = node
-            while current.right is not None:
-                temp = current
-                current = current.right
-            return current, temp
+    def __isleaf(self, node):
+        return node.left == node.right == None
 
-        def minvaluenode(node, temp):
-            current = node
-            if current is None:
-                current = temp.left.right
-            while current.left is not None:
-                temp = current
-                current = current.left
-            return current, temp
+    def __delleaf(self, node, parent):
+        if node == parent.left:
+            parent.left = None
+        else:
+            parent.right = None
 
-        def ischild(current):
-            return (current.left is None and current.right is None)
+    def __maximumnodefromleft(self, node):
+        parent = node
+        node = node.left
+        while node.right is not None:
+            parent = node
+            node = node.right
+        return node, parent
 
-        def d(current, value, temp, flag):
-            while current is not None and current.value != value:
-                temp = current
-                if current.value > value:
-                    current = current.left
-                else:
-                    current = current.right
-            if current is None:
-                if flag == 1:
-                    return
-                else:
-                    print("VAlue not found!")
-                    return
-            if ischild(current):
-                if temp.left is current:
-                    temp.left = None
-                else:
-                    temp.right = None
-                return
-            return current
+    def __minimumnodefromright(self, node):
+        parent = node
+        node = node.right
+        while node.left is not None:
+            parent = node
+            node = node.left
+        return node, parent
 
-        if self.root is None:
-            print("Tree is empty!")
+    def delete(self, value):
+        if self.root is None :
+            print("Tree is Empty!")
             return
-        current = self.root
-        if current.value == value and current.left is None and current.right is None:
-            self.root = None
+        node, parent = self.search(self.root, value, self.root)
+        if node is None and parent is None:
+            print("Entered value not found!")
             return
-
-        flag = 0
-        current = d(current, value, None, flag)
-        if current is None:
-            return
-        flag = 1
-        while not ischild(current):
-            temp = current
-            if current.right is not None:
-                min_value, temp = minvaluenode(current.right, temp)
+        if self.__isleaf(node):
+            self.__delleaf(node, parent)
+        else:
+            if node.left:
+                new_node, parent = self.__maximumnodefromleft(node)
+                node.value = new_node.value
             else:
-                min_value, temp = maxvaluenode(current.left, temp)
-            current.value = min_value.value
-            current = d(min_value, current.value, temp, flag)
-            if current is None:
-                break
-
+                new_node, parent = self.__minimumnodefromright(node)
+                node.value = new_node.value
+            self.__delleaf(node, parent)
     def inorder(self):
         root = self.root
         print("Inorder :", end="")
-
         def inorderp(root):
             if root:
                 inorderp(root.left)
@@ -158,10 +141,10 @@ print("Enter the operations you want to perform :\n1 ,for insertion\n2,for delet
 while True:
     input1 = int(input("Enter the number: "))
     if input1 == 1:
-        tree.insert(int(input("Enter the number you want to insert : ")))
+        tree.insertion(int(input("Enter the number you want to insert : ")))
         print()
     elif input1 == 2:
-        tree.deletion(int(input("Enter the you wanna delete :")))
+        tree.delete(int(input("Enter the you wanna delete :")))
         print()
     elif input1 == 3:
         tree.postorder()

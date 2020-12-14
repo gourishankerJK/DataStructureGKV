@@ -1,10 +1,11 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-
 
 class LinkedList:
+    class Node:
+        def __init__(self, value):
+            self.value = value
+            self.next = None
+
+
     def __init__(self):
         self.first = None
         self.last = None
@@ -14,7 +15,7 @@ class LinkedList:
         return self.len
 
     def append(self, value):  # appends the element at the last
-        node = Node(value)
+        node = self.Node(value)
         if self.first == self.last == None:
             self.first = node
             self.last = node
@@ -24,7 +25,7 @@ class LinkedList:
         self.len += 1
 
     def prepend(self, value):  # inserts at the beginning
-        node = Node(value)
+        node = self.Node(value)
         if self.first == self.last == None:
             self.first = node
             self.last = node
@@ -34,7 +35,7 @@ class LinkedList:
         self.len += 1
 
     def insert(self, value, pos):  # Inserts the element at given position
-        node = Node(value)
+        node = self.Node(value)
         if pos > self.len + 1:
             raise "Position don't exist!"
             return
